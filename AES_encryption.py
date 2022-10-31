@@ -8,8 +8,8 @@ matrix = [
 
 # Declaração Variaveis
 inputKey = ''
-y = 0
-x = 0
+y = int(0)
+x = int(0)
 selectOpt = 0
 
 # Tipo de operação (Introdução)

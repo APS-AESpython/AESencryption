@@ -1,5 +1,6 @@
-from multiprocessing.spawn import old_main_modules
+x = 1
 
+def test():
+    print(x)
 
-x = input() 
-print(x)
+test()
