@@ -35,7 +35,7 @@ def calculo():
 
 def chave():
     #inicio
-    print("\nDigite o numero da operação a ser realizada")
+    print(colored(0, 255, 0,"\nDigite o numero da operação a ser realizada\n"))
     print("1 - Chave de 16 caracteres (128bits)")
     print("2 - Chave de 24 caracteres (192bits)")
     print("3 - Chave de 32 caracteres (256bits)")
@@ -85,5 +85,6 @@ def chave():
 
 def test():
     print('test')
-
+    print(inputKey)
+    print(type(inputKey))
 chave()
