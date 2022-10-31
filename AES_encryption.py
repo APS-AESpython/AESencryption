@@ -69,6 +69,7 @@ for i in inputKey:
     # Converter a chave para hexadecimal e salvar na matriz
     #i = int(i, 16)
     #i = ord(i)
+    i = format(ord(i), "x")
     matrix[x][y] = i
     x = x+1
     if x > 3:
