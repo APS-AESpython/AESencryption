@@ -21,8 +21,11 @@ y = 0
 x = 0
 y1 = 0
 x1 = 0
-index = 0
+init = 0
 control = 0
+index = 0
+primeiro = 0
+ultimo = 16
 
 # Função para input da chave e da frase 
 def options(inputKey,tamanho):
@@ -74,20 +77,23 @@ for i in inputKey:
         x = 0
         y = y + 1
 
-# Guardar itens da frase na matriz
-for i in inputPhrase:
-    i = ord(i)
-    matrixPhrase[x1][y1] = i
-    x1 = x1+1
-    if x1 > 3:
-        x1 = 0
-        y1 = y1 + 1
+while ultimo < len(inputPhrase)+16:
+    # Guardar itens da frase na matriz
+    breakPhrase = inputPhrase[primeiro:ultimo]
+    for i in breakPhrase:
+        i = ord(i)
+        matrixPhrase[x1][y1] = i
+        x1 = x1+1
+        if x1 > 3:
+            x1 = 0
+            y1 = y1 + 1
+    x1 = 0
+    y1 = 0
+    breakPhrase = 0
+    primeiro = ultimo+1
+    ultimo = ultimo+16
+    print(matrixPhrase)
 
-# Navegar na matriz pegando cada valor
-while index <= 3:
-    #alguns testes apenas
-    for i in matrixKey[index]:
-        print('a')
-    index = index+1
-print(matrixKey)
-print(matrixPhrase)
+print("acabou")
+#print(matrixKey)
+#print(matrixPhrase)
