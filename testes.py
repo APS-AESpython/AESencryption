@@ -1,6 +1,3 @@
-from multiprocessing.spawn import old_main_modules
-
-
 matriz = []
 
 frase = str(input("Digite uma frase: "))

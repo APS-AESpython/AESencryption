@@ -4,15 +4,13 @@ def colored(r, g, b, text):
     return f"\033[38;2;{r};{g};{b}m{text}\033[0m"
 
 # Declaração de Variaveis globais
-global y, x, selectOpt, matrix
+global selectOpt, matriz, x, y
 
-
-y = 0
 x = 0
-
+y = 0
 
 # Matriz STATE
-matrix = [
+matriz = [
     [0,0,0,0],
     [0,0,0,0],
     [0,0,0,0],
@@ -20,19 +18,27 @@ matrix = [
 ]
 
 def calculo():
-    # Inserindo a chave na matriz
+    global inputKey, x, y
     for i in inputKey:
-    # Converter a chave para hexadecimal e salvar na matriz
-    #i = int(i, 16)
-    #i = ord(i)
+    
         i = format(ord(i), "x")
-        matrix[x][y] = i
-        x = x+1
+        matriz[x][y] = i
+        x = x + 1
         if x > 3:
             x = 0
             y = y + 1
+    #reatribuindo valores do x e y
 
-print(matrix)
+    x = 0
+    y = 0
+
+    #impressão
+    print('-' * 30)
+
+    for l in range(0, 4):
+        for c in range(0, 4):
+            print(f'[{matriz[l][c]:^5}]', end='')
+        print()
 
 def chave():
     #global entre funções
@@ -88,8 +94,5 @@ def chave():
 
     #global entre funções
     return inputKey
-def test1():
-    print('test')
-    print(inputKey)
-    print(type(inputKey))
+
 chave()
