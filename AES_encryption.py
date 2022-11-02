@@ -1,5 +1,12 @@
-# Matriz STATE
-matrix = [
+# Matriz da chave
+matrixKey = [
+    [0,0,0,0],
+    [0,0,0,0],
+    [0,0,0,0],
+    [0,0,0,0],
+]
+# Matriz da Frase
+matrixPhrase = [
     [0,0,0,0],
     [0,0,0,0],
     [0,0,0,0],
@@ -8,9 +15,22 @@ matrix = [
 
 # Declaração Variaveis
 inputKey = ''
+selectOpt = 0
 y = 0
 x = 0
-selectOpt = 0
+index = 0
+
+# Função para input da chave e da frase 
+def options(inputKey,tamanho):
+    inputPhrase = ''
+    while len(inputKey) != tamanho:
+        print("\n OBRIGATORIO {} CARACTERES".format(tamanho))
+        inputKey = str(input("Digite uma chave de criptografia: "))
+        if not len(inputKey) == tamanho:
+            print('Tamanho de chave incorreto')
+    if len(inputKey) == tamanho:
+        inputPhrase = str(input("\nDigite uma frase para ser criptografada:"))
+    return inputPhrase, inputKey
 
 # Tipo de operação (Introdução)
 while selectOpt == 0:
@@ -23,59 +43,36 @@ while selectOpt == 0:
 
     if selectOpt == 1:
         # Input da chave de 16 caracteres (16bytes/128bits)
-        while len(inputKey) == 0:
-            print("\n OBRIGATORIO 16 CARACTERES")
-            inputKey = str(input("Digite uma chave de criptografia: "))
-
-            if len(inputKey)>16:
-                print("Erro, maior do que o limite definido!!!")
-                inputKey = ''
-            elif len(inputKey)<16:
-                print("Erro, menor do que o numero necessario de caracteres!!!")
-                inputKey = ''
+        inputPhrase, inputKey = options(inputKey,16)
+        print(inputPhrase, inputKey)
 
     elif selectOpt == 2:
         # Input da chave de 24 caracteres (24bytes/192bits)
-        while len(inputKey) == 0:
-            print("\n OBRIGATORIO 24 CARACTERES")
-            inputKey = str(input("Digite uma chave de criptografia: "))
-
-            if len(inputKey)>24:
-                print("Erro, maior do que o limite definido!!!")
-                inputKey = ''
-            elif len(inputKey)<24:
-                print("Erro, menor do que o numero necessario de caracteres!!!")
-                inputKey = ''
+        inputPhrase, inputKey = options(inputKey,24)
+        print(inputPhrase, inputKey)
 
     elif selectOpt == 3:
         # Input da chave de 32 caracteres (32bytes/256bits)
-        while len(inputKey) == 0:
-            print("\n OBRIGATORIO 32 CARACTERES")
-            inputKey = str(input("Digite uma chave de criptografia: "))
-
-            if len(inputKey)>32:
-                print("Erro, maior do que o limite definido!!!")
-                inputKey = ''
-            elif len(inputKey)<32:
-                print("Erro, menor do que o numero necessario de caracteres!!!")
-                inputKey = ''
+        inputPhrase, inputKey = options(inputKey,32)
+        print(inputPhrase, inputKey)
 
     else:
         print("Erro, opção inexistente")
         selectOpt = 0
 
-# Inserindo a chave na matriz
-# Converter a chave para hexadecimal e salvar na matriz
-#i = int(i, 16)
-#i = ord(i)
-
+# Guardar itens na matriz em decimal
 for i in inputKey:
-    
-    i = format(ord(i), "x")
-    matrix[x][y] = i
+    i = ord(i)
+    matrixKey[x][y] = i
     x = x+1
     if x > 3:
         x = 0
         y = y + 1
 
-print(matrix)
+# Navegar na matriz pegando cada valor
+while index <= 3:
+    #alguns testes apenas
+    for i in matrixKey[index]:
+        print('a')
+    index = index+1
+print(matrixKey)

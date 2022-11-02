@@ -1,5 +1,11 @@
 from multiprocessing.spawn import old_main_modules
 
 
-x = input() 
-print(x)
+matriz = []
+
+frase = str(input("Digite uma frase: "))
+tamanho = len(frase)
+print(tamanho, frase)
+matriz = [[0,0,0,0]]*(int(tamanho/4))
+
+print(matriz)
