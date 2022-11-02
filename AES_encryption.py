@@ -15,10 +15,14 @@ matrixPhrase = [
 
 # Declaração Variaveis
 inputKey = ''
+inputPhrase = ''
 selectOpt = 0
 y = 0
 x = 0
+y1 = 0
+x1 = 0
 index = 0
+control = 0
 
 # Função para input da chave e da frase 
 def options(inputKey,tamanho):
@@ -60,7 +64,8 @@ while selectOpt == 0:
         print("Erro, opção inexistente")
         selectOpt = 0
 
-# Guardar itens na matriz em decimal
+# y coluna -- x linha
+# Guardar itens da chave na matriz
 for i in inputKey:
     i = ord(i)
     matrixKey[x][y] = i
@@ -69,6 +74,15 @@ for i in inputKey:
         x = 0
         y = y + 1
 
+# Guardar itens da frase na matriz
+for i in inputPhrase:
+    i = ord(i)
+    matrixPhrase[x1][y1] = i
+    x1 = x1+1
+    if x1 > 3:
+        x1 = 0
+        y1 = y1 + 1
+
 # Navegar na matriz pegando cada valor
 while index <= 3:
     #alguns testes apenas
@@ -76,3 +90,4 @@ while index <= 3:
         print('a')
     index = index+1
 print(matrixKey)
+print(matrixPhrase)
