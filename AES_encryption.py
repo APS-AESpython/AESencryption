@@ -25,7 +25,7 @@ init = 0
 control = 0
 index = 0
 primeiro = 0
-ultimo = 16
+ultimo = 16 
 
 # Função para input da chave e da frase 
 def options(inputKey,tamanho):
