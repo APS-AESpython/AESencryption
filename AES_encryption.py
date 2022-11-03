@@ -93,6 +93,7 @@ while ultimo < len(inputPhrase)+16:
     primeiro = ultimo+1
     ultimo = ultimo+16
     print(matrixPhrase)
+    print(matrixKey)
 
 print("acabou")
 #print(matrixKey)

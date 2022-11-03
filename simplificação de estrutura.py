@@ -1,3 +1,19 @@
+# Variaveis
+global ultimo, primeiro, matrixKey, matrixPhrase, x, y, x1, y2
+
+bytesize_key = 0
+
+ultimo = 16
+primeiro = 0
+
+y = 0
+x = 0
+y1 = 0
+x1 = 0
+init = 0
+control = 0
+index = 0
+
 # Matrizes
 # Matriz da chave
 matrixKey = [
@@ -14,26 +30,20 @@ matrixPhrase = [
     [0,0,0,0],
 ]
 
-# Variaveis
-global bytesize_key, inputKey, inputPhrase, ultimo
-bytesize_key = 0
-inputKey = ''
-inputPhrase = ''
 
-y = 0
-x = 0
-y1 = 0
-x1 = 0
-init = 0
-control = 0
-index = 0
-primeiro = 0
-ultimo = 16
+
+
 
 # Codigo
 
 # Tipo de operação (Introdução)
 def iniciar():
+    global bytesize_key, inputKey, inputPhrase
+    inputKey = ''
+    inputPhrase = ''
+
+    print(bytesize_key)
+
     # opções print
     print("\nDigite o tipo de operação a ser realizada")
     print("1 - Chave de 16 caracteres (128bits)")
@@ -66,20 +76,25 @@ def iniciar():
 
     print("\n OBRIGATORIO {} CARACTERES".format(bytesize_key))
     inputKey = str(input("Digite uma chave de criptografia: "))
-
+    
     while len(inputKey) != bytesize_key:
         print("\n OBRIGATORIO {} CARACTERES".format(bytesize_key))
         inputKey = str(input("Digite uma chave de criptografia: "))
         
-
+    
     inputPhrase = str(input("\nDigite uma frase para ser criptografada:"))
-
+    
+    
     savekeys()
-
     return bytesize_key, inputKey, inputPhrase
 
+    
+
 def savekeys():
-    # Guardar chave de encriptação dentro da matriz
+    global ultimo, primeiro, x1, y1, x, y
+    print('verificação:', inputKey, inputPhrase, bytesize_key, '1', matrixKey, '2', matrixPhrase)
+    # y coluna -- x linha
+    # Guardar itens da chave na matriz
     for i in inputKey:
         i = ord(i)
         matrixKey[x][y] = i
@@ -87,14 +102,24 @@ def savekeys():
         if x > 3:
             x = 0
             y = y + 1
-    # Guardar frase de encriptação dentro da matriz
-    for i in matrixPhrase:
-        i = ord(i)
-        matrixKey[x][y] = i
-        x = x+1
-        if x > 3:
-            x = 0
-            y = y + 1
+
+    while ultimo < len(inputPhrase)+16:
+        # Guardar itens da frase na matriz
+        breakPhrase = inputPhrase[primeiro:ultimo]
+        for i in breakPhrase:
+            i = ord(i)
+            matrixPhrase[x1][y1] = i
+            x1 = x1+1
+            if x1 > 3:
+                x1 = 0
+                y1 = y1 + 1
+        x1 = 0
+        y1 = 0
+        breakPhrase = 0
+        primeiro = ultimo+1
+        ultimo = ultimo+16
+        print('verificação:', inputKey, inputPhrase, bytesize_key, '1', matrixKey, '2', matrixPhrase)
+    print('verificação:', inputKey, inputPhrase, bytesize_key, '1', matrixKey, '2', matrixPhrase)
     print('fim')
 
 iniciar()
