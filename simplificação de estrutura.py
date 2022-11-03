@@ -30,11 +30,7 @@ matrixPhrase = [
     [0,0,0,0],
 ]
 
-
-
-
-
-# Codigo
+# O Codigo
 
 # Tipo de operação (Introdução)
 def iniciar():
@@ -88,8 +84,7 @@ def iniciar():
     savekeys()
     return bytesize_key, inputKey, inputPhrase
 
-    
-
+# Operação para salvar tanto a chave quanto a frase dentro da matriz
 def savekeys():
     global ultimo, primeiro, x1, y1, x, y
 
@@ -107,7 +102,7 @@ def savekeys():
         
     
     
-    print('matriz frase')
+    
     while ultimo < len(inputPhrase)+16:
         # Guardar itens da frase na matriz
         breakPhrase = inputPhrase[primeiro:ultimo]
@@ -123,13 +118,15 @@ def savekeys():
         breakPhrase = 0
         primeiro = ultimo+1
         ultimo = ultimo+16
-        
-        verify()
-        return matrixKey, matrixPhrase
+        print('matriz frase \n')
+        for i in range(0, 4):
+                for j in range(0, 4):
+                    print(f'[{matrixPhrase[i][j]:^5}]', end='')
+                print()
+    verify()
+    return matrixKey, matrixPhrase
                 
-
-    
-
+#  Verificação de dados
 def verify():
     
     print('matriz chave \n')
@@ -137,9 +134,11 @@ def verify():
         for y in range(0, 4):
             print(f'[{matrixKey[x][y]:^5}]', end='')
         print()
+
     print('matriz frase \n')
     for i in range(0, 4):
             for j in range(0, 4):
                 print(f'[{matrixPhrase[i][j]:^5}]', end='')
             print()
+
 iniciar()
