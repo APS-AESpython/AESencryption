@@ -92,9 +92,12 @@ def iniciar():
 
 def savekeys():
     global ultimo, primeiro, x1, y1, x, y
-    print('verificação:', inputKey, inputPhrase, bytesize_key, '1', matrixKey, '2', matrixPhrase)
+
+    print('verificação1:', inputKey, inputPhrase, bytesize_key, '1', matrixKey, '2', matrixPhrase)
+
     # y coluna -- x linha
     # Guardar itens da chave na matriz
+    print('matriz chave')
     for i in inputKey:
         i = ord(i)
         matrixKey[x][y] = i
@@ -102,7 +105,12 @@ def savekeys():
         if x > 3:
             x = 0
             y = y + 1
-
+        
+    for x in range(0, 4):
+        for y in range(0, 4):
+            print(f'[{matrixKey[x][y]:^5}]', end='')
+        print()
+    print('matriz frase')
     while ultimo < len(inputPhrase)+16:
         # Guardar itens da frase na matriz
         breakPhrase = inputPhrase[primeiro:ultimo]
@@ -118,8 +126,14 @@ def savekeys():
         breakPhrase = 0
         primeiro = ultimo+1
         ultimo = ultimo+16
-        print('verificação:', inputKey, inputPhrase, bytesize_key, '1', matrixKey, '2', matrixPhrase)
-    print('verificação:', inputKey, inputPhrase, bytesize_key, '1', matrixKey, '2', matrixPhrase)
+        
+        for i in range(0, 4):
+            for j in range(0, 4):
+                print(f'[{matrixPhrase[i][j]:^5}]', end='')
+            print()
+                
+
+    print('verificação2:', inputKey, inputPhrase, bytesize_key)
     print('fim')
 
 iniciar()
