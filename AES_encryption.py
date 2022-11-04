@@ -5,38 +5,26 @@ matrixKey = [
     [0,0,0,0],
     [0,0,0,0],
 ]
-# Matriz da Frase
-matrixPhrase = [
-    [0,0,0,0],
-    [0,0,0,0],
-    [0,0,0,0],
-    [0,0,0,0],
-]
 
 # Declaração Variaveis
 inputKey = ''
-inputPhrase = ''
+inputPhrase = []
 selectOpt = 0
 y = 0
 x = 0
 y1 = 0
 x1 = 0
-init = 0
-control = 0
-index = 0
-primeiro = 0
-ultimo = 16 
 
 # Função para input da chave e da frase 
 def options(inputKey,tamanho):
-    inputPhrase = ''
+    inputPhrase = []
     while len(inputKey) != tamanho:
         print("\n OBRIGATORIO {} CARACTERES".format(tamanho))
         inputKey = str(input("Digite uma chave de criptografia: "))
         if not len(inputKey) == tamanho:
             print('Tamanho de chave incorreto')
     if len(inputKey) == tamanho:
-        inputPhrase = str(input("\nDigite uma frase para ser criptografada:"))
+        inputPhrase = list(input("\nDigite uma frase para ser criptografada:"))
     return inputPhrase, inputKey
 
 # Tipo de operação (Introdução)
@@ -77,9 +65,24 @@ for i in inputKey:
         x = 0
         y = y + 1
 
-while ultimo < len(inputPhrase)+16:
-    # Guardar itens da frase na matriz
-    breakPhrase = inputPhrase[primeiro:ultimo]
+# Código para realizar a criptografia
+while len(inputPhrase) != 0:
+    # Matriz da Frase
+    matrixPhrase = [
+        [0,0,0,0],
+        [0,0,0,0],
+        [0,0,0,0],
+        [0,0,0,0],
+    ]
+
+    # Quebra o input em partes de 16
+    breakPhrase = inputPhrase[0:16]
+
+    # Deleta cada indice de 0 a 16
+    for i in inputPhrase[0:16]:
+        inputPhrase.remove(i)
+
+    # Guarda a frase quebrada na matriz
     for i in breakPhrase:
         i = ord(i)
         matrixPhrase[x1][y1] = i
@@ -89,12 +92,9 @@ while ultimo < len(inputPhrase)+16:
             y1 = y1 + 1
     x1 = 0
     y1 = 0
-    breakPhrase = 0
-    primeiro = ultimo+1
-    ultimo = ultimo+16
-    print(matrixPhrase)
-    print(matrixKey)
 
+    # Resto da criptografia
+    print(matrixPhrase)
+
+print(matrixKey)
 print("acabou")
-#print(matrixKey)
-#print(matrixPhrase)
