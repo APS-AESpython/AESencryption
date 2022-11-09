@@ -43,6 +43,8 @@ x1 = 0
 s_list = []
 FinalList = []
 vezes = 1
+breakPhrase2 = []
+breakPhrase3 = []
 
 # Função para input da chave e da frase 
 def options(inputKey,tamanho):
@@ -103,15 +105,22 @@ while len(inputPhrase) != 0:
     vezes = 1
 
     # Quebra o input em partes de 16
-    breakPhrase = inputPhrase[0:16]
-    print(breakPhrase)
+    breakPhrase = inputPhrase[0:32]
+
     # Deleta cada indice de 0 a 16
-    for i in inputPhrase[0:16]:
+    for i in inputPhrase[0:32]:
         inputPhrase.remove(i)
 
+    for i in range(int(len(breakPhrase)/2)+1):
+        breakPhrase2 = breakPhrase[0:2]
+        for i in breakPhrase[0:2]:
+            breakPhrase.remove(i)
+        breakPhrase3.append(int(''.join(breakPhrase2),16))
+        print(breakPhrase2,i)
+        print(breakPhrase3)
+
     # Guarda a frase quebrada na matriz
-    for i in breakPhrase:
-        i = ord(i)
+    for i in breakPhrase3:
         matrixPhrase[x1][y1] = i
         x1 = x1+1
         if x1 > 3:
@@ -160,10 +169,10 @@ while len(inputPhrase) != 0:
         for i in range(4):
             FinalList.append(matrixPhrase[i][j])
 
-    #print("LISTA FINAL: ",FinalList)
+    print("LISTA FINAL: ",FinalList)
 
 for i in range(len(FinalList)):
-    FinalList[i] = hex(FinalList[i]).upper().replace("0X","")
+    FinalList[i] = chr(FinalList[i])
 
 #print("acabou")
 print("FRASE CRIPTOGRAFADA: ",''.join(FinalList))
