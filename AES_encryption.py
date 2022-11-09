@@ -41,6 +41,8 @@ x = 0
 y1 = 0
 x1 = 0
 s_list = []
+FinalList = []
+vezes = 1
 
 # Função para input da chave e da frase 
 def options(inputKey,tamanho):
@@ -91,13 +93,14 @@ for i in inputKey:
 
 # Código para realizar a criptografia
 while len(inputPhrase) != 0:
-    # Matriz da Frase
+    # Reset matriz frase e variavel vezes
     matrixPhrase = [
         [0,0,0,0],
         [0,0,0,0],
         [0,0,0,0],
         [0,0,0,0],
     ]
+    vezes = 1
 
     # Quebra o input em partes de 16
     breakPhrase = inputPhrase[0:16]
@@ -118,28 +121,49 @@ while len(inputPhrase) != 0:
     y1 = 0
 
     # Criptografia
-    print(matrixPhrase, "matriz antes do xor")
+    #print(matrixPhrase, "Matriz Original")
     # Fazendo o xor da frase com a chave
     for i in range(4):
         for j in range(4):
             matrixPhrase[j][i] = matrixPhrase[j][i] ^ matrixKey[j][i]
-    print(matrixPhrase, "matriz depois do xor")
+    #print(matrixPhrase, "Matriz depois do xor inicial")
 
-    # SubBytes (S-box)
+    while vezes <= 9:
+        # SubBytes (S-box)
+        for j in range(4):
+            for i in range(4):
+                matrixPhrase[j][i] = s_box[matrixPhrase[j][i]]
+        #print(matrixPhrase, "Depois do s_box")
+
+        # ShiftRows
+        matrixPhrase[0][1], matrixPhrase[1][1], matrixPhrase[2][1], matrixPhrase[3][1] = matrixPhrase[1][1], matrixPhrase[2][1], matrixPhrase[3][1], matrixPhrase[0][1]
+        matrixPhrase[0][2], matrixPhrase[1][2], matrixPhrase[2][2], matrixPhrase[3][2] = matrixPhrase[2][2], matrixPhrase[3][2], matrixPhrase[0][2], matrixPhrase[1][2]
+        matrixPhrase[0][3], matrixPhrase[1][3], matrixPhrase[2][3], matrixPhrase[3][3] = matrixPhrase[3][3], matrixPhrase[0][3], matrixPhrase[1][3], matrixPhrase[2][3]
+        #print(matrixPhrase, "Depois do shiftrows")
+
+        # MixColumns
+        for j in range(4):
+            for i in range(4):
+                matrixPhrase[i][j] = matrixPhrase[i][j] ^ matrixGF[j][i]
+        #print(matrixPhrase, "matriz xor depois da Galois Field")
+
+        # AddRoundKey
+        for j in range(4):
+            for i in range(4):
+                matrixPhrase[i][j] = matrixPhrase[i][j] ^ matrixKey[j][i]
+        #print(matrixPhrase, "matriz xor depois da chave nova")
+        #print(vezes)
+
+        vezes = vezes + 1
+    
     for j in range(4):
         for i in range(4):
-            matrixPhrase[j][i] = s_box[matrixPhrase[j][i]]
-    print(matrixPhrase, "Depois do s_box")
+            FinalList.append(matrixPhrase[i][j])
 
-    # ShiftRows
-    matrixPhrase[0][1], matrixPhrase[1][1], matrixPhrase[2][1], matrixPhrase[3][1] = matrixPhrase[1][1], matrixPhrase[2][1], matrixPhrase[3][1], matrixPhrase[0][1]
-    matrixPhrase[0][2], matrixPhrase[1][2], matrixPhrase[2][2], matrixPhrase[3][2] = matrixPhrase[2][2], matrixPhrase[3][2], matrixPhrase[0][2], matrixPhrase[1][2]
-    matrixPhrase[0][3], matrixPhrase[1][3], matrixPhrase[2][3], matrixPhrase[3][3] = matrixPhrase[3][3], matrixPhrase[0][3], matrixPhrase[1][3], matrixPhrase[2][3]
-    print(matrixPhrase, "Matriz depois do shiftrows")
+    #print("LISTA FINAL: ",FinalList)
 
-    # MixColumns
-    for j in range(4):
-        for i in range(4):
-            matrixPhrase[i][0] = matrixPhrase[i][0] ^ matrixGF[j][i]
-    print(matrixPhrase, "matriz xor depois da Galois Field")
-print("acabou")
+for i in range(len(FinalList)):
+    FinalList[i] = hex(FinalList[i]).upper().replace("0X","")
+
+#print("acabou")
+print("FRASE CRIPTOGRAFADA: ",''.join(FinalList))
