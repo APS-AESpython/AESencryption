@@ -126,32 +126,32 @@ while len(inputPhrase) != 0:
     for i in range(4):
         for j in range(4):
             matrixPhrase[j][i] = matrixPhrase[j][i] ^ matrixKey[j][i]
-    #print(matrixPhrase, "Matriz depois do xor inicial")
+    print(matrixPhrase, "Matriz depois do xor inicial")
 
-    while vezes <= 9:
+    while vezes <= 1:
         # SubBytes (S-box)
         for j in range(4):
             for i in range(4):
                 matrixPhrase[j][i] = s_box[matrixPhrase[j][i]]
-        #print(matrixPhrase, "Depois do s_box")
+        print(matrixPhrase, "Depois do s_box")
 
         # ShiftRows
         matrixPhrase[0][1], matrixPhrase[1][1], matrixPhrase[2][1], matrixPhrase[3][1] = matrixPhrase[1][1], matrixPhrase[2][1], matrixPhrase[3][1], matrixPhrase[0][1]
         matrixPhrase[0][2], matrixPhrase[1][2], matrixPhrase[2][2], matrixPhrase[3][2] = matrixPhrase[2][2], matrixPhrase[3][2], matrixPhrase[0][2], matrixPhrase[1][2]
         matrixPhrase[0][3], matrixPhrase[1][3], matrixPhrase[2][3], matrixPhrase[3][3] = matrixPhrase[3][3], matrixPhrase[0][3], matrixPhrase[1][3], matrixPhrase[2][3]
-        #print(matrixPhrase, "Depois do shiftrows")
+        print(matrixPhrase, "Depois do shiftrows")
 
         # MixColumns
         for j in range(4):
             for i in range(4):
                 matrixPhrase[i][j] = matrixPhrase[i][j] ^ matrixGF[j][i]
-        #print(matrixPhrase, "matriz xor depois da Galois Field")
+        print(matrixPhrase, "matriz xor depois da Galois Field")
 
         # AddRoundKey
         for j in range(4):
             for i in range(4):
                 matrixPhrase[i][j] = matrixPhrase[i][j] ^ matrixKey[j][i]
-        #print(matrixPhrase, "matriz xor depois da chave nova")
+        print(matrixPhrase, "matriz xor depois da chave nova")
         #print(vezes)
 
         vezes = vezes + 1
